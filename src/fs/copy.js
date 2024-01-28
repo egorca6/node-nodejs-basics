@@ -1,5 +1,24 @@
+import { readdir } from "node:fs/promises";
+import { mkdir, copyFile, access } from "node:fs/promises";
 const copy = async () => {
-    // Write your code here 
+  try {
+    await access("fs/files");
+    await mkdir("fs/files_copy", { recursive: false });
+    const files = await readdir("fs/files");
+    for (const file of files) {
+      const sourcePath = `fs/files/${file}`;
+      const destPath = `fs/files_copy/${file}`;
+      await copyFile(sourcePath, destPath);
+    }
+  } catch (err) {
+    if (err.code === "EEXIST") {
+      console.error(
+        'FS operation failed: Directory "files_copy" already exist'
+      );
+    } else {
+      console.log(`FS operation failed: Directory "files" doesn't exists `);
+    }
+  }
 };
 
 await copy();
