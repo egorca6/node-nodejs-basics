@@ -2,12 +2,12 @@ import { readdir } from "node:fs/promises";
 import { mkdir, copyFile, access } from "node:fs/promises";
 const copy = async () => {
   try {
-    await access("fs/files");
-    await mkdir("fs/files_copy", { recursive: false });
-    const files = await readdir("fs/files");
+    await access("src/fs/files");
+    await mkdir("src/fs/files_copy", { recursive: false });
+    const files = await readdir("src/fs/files");
     for (const file of files) {
-      const sourcePath = `fs/files/${file}`;
-      const destPath = `fs/files_copy/${file}`;
+      const sourcePath = `src/fs/files/${file}`;
+      const destPath = `src/fs/files_copy/${file}`;
       await copyFile(sourcePath, destPath);
     }
   } catch (err) {

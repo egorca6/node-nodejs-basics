@@ -1,13 +1,13 @@
 import { rename as renameFs, stat } from "node:fs";
 
 const rename = async () => {
-  stat("fs/files/properFilename.md", (err, stats) => {
+  stat("src/fs/files/properFilename.md", (err, stats) => {
     if (stats) {
       console.error("FS operation failed. File already exists");
     } else {
       renameFs(
-        "fs/files/wrongFilename.txt",
-        "fs/files/properFilename.md",
+        "src/fs/files/wrongFilename.txt",
+        "src/fs/files/properFilename.md",
         (err) => {
           if (err) {
             console.error(
